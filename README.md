@@ -1,5 +1,5 @@
 # homebridge-MotionSensor
-HomeBridge HomeKit Plugin for arduino based PIR motion sensors
+HomeBridge HomeKit Plugin for Arduino based HC-SR501 PIR motion sensors
 
 
 Creates a Motion Sensor Accessory for iOS Home app/Homekit via Homebridge.
