@@ -1,11 +1,11 @@
-//DEBUG=* ./bin/homebridge -D -P ../homebridge-CurrentAmbientLightLevel/
+//DEBUG=* ./bin/homebridge -D -P ../homebridge-MotionSensor/
 var Service, Characteristic;
 var request = require('sync-request');
 
 module.exports = function (homebridge) {
    Service = homebridge.hap.Service;
    Characteristic = homebridge.hap.Characteristic;
-   homebridge.registerAccessory("homebridge-CurrentAmbientLightLevel", "Light", HttpTemperature);
+   homebridge.registerAccessory("homebridge-MotionSensor", "Motion", HttpTemperature);
 }
 
 
@@ -48,7 +48,7 @@ HttpTemperature.prototype = {
          var info = JSON.parse(res.body);
 
          this.temperatureService.setCharacteristic(
-            Characteristic.CurrentAmbientLightLevel,
+            Characteristic.MotionDetected,
             info.lightval
          );
          this.log(info);
@@ -71,9 +71,9 @@ HttpTemperature.prototype = {
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-      this.temperatureService = new Service.LightSensor(this.name);
+      this.temperatureService = new Service.MotionSensor(this.name);
       this.temperatureService
-         .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+         .getCharacteristic(Characteristic.MotionDetected)
          .on('get', this.getState.bind(this));
 
       return [this.informationService, this.temperatureService];
