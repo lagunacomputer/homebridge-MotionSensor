@@ -49,13 +49,13 @@ HttpTemperature.prototype = {
 
          this.temperatureService.setCharacteristic(
             Characteristic.MotionDetected,
-            info.lightval
+            info.pirval
          );
          this.log(info);
 
-         this.lightval = info.lightval;
+         this.pirval = info.pirval;
 
-         callback(null, this.lightval);
+         callback(null, this.pirval);
       }
    },
 
