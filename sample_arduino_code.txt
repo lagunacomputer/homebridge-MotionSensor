@@ -33,7 +33,7 @@ DallasTemperature sensors(&ourWire);
 
 int photocellPin = 1;     // the cell and 10K pulldown are connected to a1
 int photocellReading;     // the analog reading from the analog resistor divider
-int pirReading; 
+boolean pirReading = false; 
 //the time we give the sensor to calibrate (10-60 secs according to the datasheet)
 int calibrationTime = 30;
 
@@ -80,6 +80,7 @@ readPhotocell();
 
 float temperatureIndoor;
   float temperatureOutdoor;
+  //boolean pirReading;
   delay(100);
   // Create a client connection
   EthernetClient client = server.available();
@@ -150,7 +151,7 @@ float temperatureIndoor;
           client.print(",");
 client.print("\"pirval\":");
           client.print(pirReading);
-
+//client.print("True");
 
           
           client.print("}");
@@ -242,6 +243,7 @@ photocellReading = analogRead(photocellPin);
 }
 
 void readPIR(){
+  Serial.println(pirReading);     // the raw analog reading
  if (digitalRead(pirPin) == HIGH) {
     //digitalWrite(ledPin, HIGH);   //the led visualizes the sensors output pin state
     if (lockLow) {
@@ -254,14 +256,14 @@ void readPIR(){
       delay(50);
     }
     takeLowTime = true;
-pirReading = 1; 
+pirReading = true; 
     //alarmTriggered();
   }
 
 
   if (digitalRead(pirPin) == LOW) {
     //digitalWrite(ledPin, LOW);  //the led visualizes the sensors output pin state
-pirReading = 0; 
+pirReading = false; 
     if (takeLowTime) {
       lowIn = millis();          //save the time of the transition from high to LOW
       takeLowTime = false;       //make sure this is only done at the start of a LOW phase
