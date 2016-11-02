@@ -11,3 +11,29 @@ This is a feeble attempt at a work in progress. Most of the code is stolen from 
 Once this is complete, basically all sorts of input sensors become available to us .... The list of possible sensor types are here: https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js I imagine that soon HomeKit will include all kinds of options for automation based on input sensors. ie: "when its dark, turn on the light" etc...
 
 *update 11/1/2016 i should be able to convert the CurrentAmbientLightLevel code into Motion Sensor, stay tuned
+
+
+{
+
+"bridge": {
+"name": "HomeBridge",
+"username": "CC:22:3D:E3:CE:30",
+"port": 51826,
+"pin": "031-45-154"
+},
+
+"description": "",
+
+
+    "accessories": [
+    {
+        "accessory": "Motion",
+        "name": "Motion Sensor",
+        "url": "http://192.168.1.201/light",
+        "sendimmediately": "",
+        "http_method": "GET"
+    }
+]
+
+"platforms": []
+}
