@@ -24,10 +24,12 @@ Once this is complete, basically all sorts of input sensors become available to 
 "username": "CC:22:3D:E3:CE:30",
 "port": 51826,
 "pin": "031-45-154"
+
 },
 
 "description": "",
     "accessories": [
+    
     {
         "accessory": "Motion",
         "name": "Motion Sensor",
@@ -35,7 +37,9 @@ Once this is complete, basically all sorts of input sensors become available to 
         "sendimmediately": "",
         "http_method": "GET"
     }
+    
 ]
 
 "platforms": []
+
 }
