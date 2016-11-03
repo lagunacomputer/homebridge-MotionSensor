@@ -4,6 +4,8 @@ HomeBridge HomeKit Plugin for Arduino based HC-SR501 PIR motion sensors
 
 Creates a Motion Sensor Accessory for iOS Home app/Homekit via Homebridge.
 
+sudo npm install -g https://www.npmjs.com/package/homebridge-MotionSensor
+
 Please feel free to fix it, I am a copy/paste type of programmer and my skills are meager and limited.
 
 This is a feeble attempt at a work in progress. Most of the code is stolen from other authors, will update as I go. the basic idea here is to rip off https://github.com/lucacri/homebridge-http-temperature-humidity and/or https://github.com/metbosch/homebridge-http-temperature/blob/master/index.js, but change the Accessory/Service info for CurrentAmbientLightLevel instead of CurrentTemperature, and then mess with returning as a % or not for the Home app icon. This plugin is based on the plugins above, as well as https://github.com/lagunacomputer/homebridge-CurrentAmbientLightLevel.
