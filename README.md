@@ -27,13 +27,11 @@ Once this is complete, basically all sorts of input sensors become available to 
 },
 
 "description": "",
-
-
     "accessories": [
     {
         "accessory": "Motion",
         "name": "Motion Sensor",
-        "url": "http://192.168.1.201/?light",
+        "url": "http://192.168.1.101/?light",
         "sendimmediately": "",
         "http_method": "GET"
     }
