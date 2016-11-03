@@ -13,7 +13,8 @@ This is a feeble attempt at a work in progress. Most of the code is stolen from 
 Once this is complete, basically all sorts of input sensors become available to us .... The list of possible sensor types are here: https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js I imagine that soon HomeKit will include all kinds of options for automation based on input sensors. ie: "If there is Motion Detected in the Garage, turn on the Living Room Lamp" etc...
 
 *update 11/1/2016 i should be able to convert the CurrentAmbientLightLevel code into Motion Sensor, stay tuned
-*update 11/1/2016 ok i got it working!  We now have Motion Sensors in HomeKit!
+
+*update 11/1/2016 ok i got it working!  We now have Motion Sensors in HomeKit!  Use an AppleTV4 or the EVE iOS app to create Automation Rules and Triggers! See http://www.instructables.com/id/HomeKit-HomeBridge-Siri-Enabled-Arduino-ESP8266-No-1/
 
 
 {
