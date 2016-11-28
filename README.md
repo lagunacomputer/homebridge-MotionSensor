@@ -17,6 +17,10 @@ Once this is complete, basically all sorts of input sensors become available to 
 *update 11/1/2016 ok i got it working!  We now have Motion Sensors in HomeKit!  Use an AppleTV4 or the EVE iOS app to create Automation Rules and Triggers! See http://www.instructables.com/id/HomeKit-HomeBridge-Siri-Enabled-Arduino-ESP8266-No-1/
 
 
+If someone could figure out how to make the motion sensor report back its status in realtime or quicker intervals, possibly by hacking up homebridge-http plugin, it would be most helpful for automation
+
+
+
 {
 
 "bridge": {
