@@ -7,7 +7,7 @@ For now, the state of the sensor is only checked when homebridge requests the cu
 ### Installation
 
 1. Install homebridge using: ```npm install -g homebridge```
-2. Install this plugin using: ```npm install -g homebridge-http-temperature```
+2. Install this plugin using: ```npm install -g homebridge-MotionSensor```
 3. Update your configuration file. See sample-config.json in this repository for a sample.
 
 ### Configuration
