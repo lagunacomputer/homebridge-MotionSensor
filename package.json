@@ -1,7 +1,7 @@
 {
   "name": "homebridge-MotionSensor",
   "version": "0.0.1",
-  "description": "https motion sensor plugin for homebridge",
+  "description": "http/https motion sensor plugin for homebridge",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin",
@@ -20,6 +20,6 @@
     "url": "git://github.com/lagunacomputer/homebridge-MotionSensor.git"
   },
   "dependencies": {
-    "sync-request": "^2.1.0"
+    "request": "^2.0.0"
   }
 }

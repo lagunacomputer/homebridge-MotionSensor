@@ -1,49 +1,31 @@
 # homebridge-MotionSensor
-HomeBridge HomeKit Plugin for Arduino based HC-SR501 PIR motion sensors
-
 
 Creates a Motion Sensor Accessory for iOS Home app/Homekit via Homebridge.
-
-sudo npm install -g https://www.npmjs.com/package/homebridge-MotionSensor
-
-Please feel free to fix it, I am a copy/paste type of programmer and my skills are meager and limited.
-
-This is a feeble attempt at a work in progress. Most of the code is stolen from other authors, will update as I go. the basic idea here is to rip off https://github.com/lucacri/homebridge-http-temperature-humidity and/or https://github.com/metbosch/homebridge-http-temperature/blob/master/index.js, but change the Accessory/Service info for MotionDetected instead of CurrentTemperature. This plugin is based on the plugins above, as well as https://github.com/lagunacomputer/homebridge-CurrentAmbientLightLevel.
-
-Once this is complete, basically all sorts of input sensors become available to us .... The list of possible sensor types are here: https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js I imagine that soon HomeKit will include all kinds of options for automation based on input sensors. ie: "If there is Motion Detected in the Garage, turn on the Living Room Lamp" etc...
-
-*update 11/1/2016 i should be able to convert the CurrentAmbientLightLevel code into Motion Sensor, stay tuned
-
-*update 11/1/2016 ok i got it working!  We now have Motion Sensors in HomeKit!  Use an AppleTV4 or the EVE iOS app to create Automation Rules and Triggers! See http://www.instructables.com/id/HomeKit-HomeBridge-Siri-Enabled-Arduino-ESP8266-No-1/
+For now, the state of the sensor is only checked when homebridge requests the current value.
 
 
-If someone could figure out how to make the motion sensor report back its status in realtime or quicker intervals, possibly by hacking up homebridge-http plugin, it would be most helpful for automation
+### Installation
 
+1. Install homebridge using: ```npm install -g homebridge```
+2. Install this plugin using: ```npm install -g homebridge-MotionSensor```
+3. Update your configuration file. See sample-config.json in this repository for a sample.
 
+### Configuration
 
-{
+See the sample-config.file to see an example of working accessory. Following, all available options are explained:
 
-"bridge": {
-"name": "HomeBridge",
-"username": "CC:22:3D:E3:CE:30",
-"port": 51826,
-"pin": "031-45-154"
+The mandatory options are:
+ * ```url``` Endpoint to call when the state is requested.
+ * ```name``` Accessory name.
 
-},
+The other available options are:
+ * ```manufacter``` Manufacter name to be displayed.
+ * ```model``` Model name to be displayed.
+ * ```serial``` Serial number to be displayed.
+ * ```http_method``` Http metod that will be used to call the ```url``` when the state is requested. Default is 'GET' (check request module to get the available options).
+ * ```json_response``` This option defines the field that must be parsed to get the state in the endpoint response body. If not defined (or if the value is an empty string which is the default) the response is assumed to be a boolean value directly.
 
-"description": "",
-    "accessories": [
-    
-    {
-        "accessory": "Motion",
-        "name": "Motion Sensor",
-        "url": "http://192.168.1.101/?light",
-        "sendimmediately": "",
-        "http_method": "GET"
-    }
-    
-]
-
-"platforms": []
-
-}
+### Endpoint expectations
+The enpoint can return 2 types of body responses:
+ * JSON. The reponse body is a JSON and the fied with the current status is defined using the ```json_response``` option.
+ * Boolean value. The response body is directyle the current status. Accepted values are: 0, false, 1, true.

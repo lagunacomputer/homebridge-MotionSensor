@@ -1,0 +1,27 @@
+{
+    "bridge": {
+        "name": "HomebridgePI",
+        "username": "CD:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-156"
+    },
+
+    "description": "The motion!",
+
+    "platforms": [],
+
+    "accessories": [
+        {
+            "accessory": "Motion",
+            "name": "Outside Motion Sensor",
+            "url": "http://192.168.1.210/motionEndpoint",
+            "http_method": "GET"
+        },{
+            "accessory": "Motion",
+            "name": "Bedroom Motion Sensor",
+            "url": "http://192.168.1.220/motionEndpoint?json=true",
+            "http_method": "GET",
+            "json_response": "value"
+        }
+    ]
+}

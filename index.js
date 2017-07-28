@@ -1,15 +1,16 @@
-//DEBUG=* ./bin/homebridge -D -P ../homebridge-MotionSensor/
 var Service, Characteristic;
-var request = require('sync-request');
+const request = require('request');
+
+const DEF_TIMEOUT = 3000;
 
 module.exports = function (homebridge) {
    Service = homebridge.hap.Service;
    Characteristic = homebridge.hap.Characteristic;
-   homebridge.registerAccessory("homebridge-MotionSensor", "Motion", HttpTemperature);
+   homebridge.registerAccessory("homebridge-MotionSensor", "Motion", HttpMotion);
 }
 
 
-function HttpTemperature(log, config) {
+function HttpMotion(log, config) {
    this.log = log;
 
    // url info
@@ -17,51 +18,51 @@ function HttpTemperature(log, config) {
    this.http_method = config["http_method"] || "GET";
    this.name = config["name"];
    this.manufacturer = config["manufacturer"] || "@lagunacomputer";
-   this.model = config["model"] || "Model not available";
+   this.model = config["model"] || "Simple HTTP motion sensor";
    this.serial = config["serial"] || "Non-defined serial";
+   this.timeout = DEF_TIMEOUT;
+   this.json_response = config["json_response"] || "";
 }
 
-HttpTemperature.prototype = {
-
-   httpRequest: function (url, body, method, username, password, sendimmediately, callback) {
-      cons
-      request({
-         url: url,
-         body: body,
-         method: method,
-         rejectUnauthorized: false
-      },
-      function (error, response, body) {
-         callback(error, response, body)
-      })
-   },
+HttpMotion.prototype = {
 
    getState: function (callback) {
-      var body;
+      var ops = {
+         uri:    this.url,
+         method: this.http_method,
+         timeout: this.timeout
+      };
+      this.log('Requesting motion on "' + ops.uri + '", method ' + ops.method + ', timeout ' + ops.timeout);
+      request(ops, (error, res, body) => {
+         var value = null;
+         if (error) {
+            this.log('HTTP bad response (' + ops.uri + '): ' + error.message);
+         } else if (this.json_response === "") {
+            value = body;
+            this.log('HTTP successful response: ' + body);
+         } else {
+            try {
+               value = JSON.parse(body)[this.json_response];
+               this.log('HTTP successful response: ' + body);
+            } catch (parseErr) {
+               this.log('Error processing received information: ' + parseErr.message);
+               error = parseErr;
+            }
+         }
+         if (!error) {
+            // Properly set the return value
+            if (value === '1' || value === 1 || value === 'true' || value === 'TRUE') value = true;
+            else if (value === '0' || value === 0 || value === 'false' || value === 'FALSE') value = false;
 
-      var res = request(this.http_method, this.url, {});
-      if(res.statusCode > 400){
-         this.log('HTTP get state function failed');
-         callback(error);
-      } else {
-         this.log('HTTP get state function succeeded!');
-         var info = JSON.parse(res.body);
-
-         this.temperatureService.setCharacteristic(
-            Characteristic.MotionDetected,
-            info.pirval
-         );
-         this.log(info);
-
-         this.pirval = info.pirval;
-
-         callback(null, this.pirval);
-      }
-   },
-
-   identify: function (callback) {
-      this.log("Identify requested!");
-      callback(); // success
+            // Check if return value is valid
+            if (value !== true && value !== false) {
+               this.log('Received value is not valid. Returning "false"');
+               value = false;
+            }
+         }
+        
+         callback(error, value);
+      });
    },
 
    getServices: function () {
@@ -71,11 +72,11 @@ HttpTemperature.prototype = {
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-      this.temperatureService = new Service.MotionSensor(this.name);
-      this.temperatureService
+      this.motionService = new Service.MotionSensor(this.name);
+      this.motionService
          .getCharacteristic(Characteristic.MotionDetected)
          .on('get', this.getState.bind(this));
 
-      return [this.informationService, this.temperatureService];
+      return [this.informationService, this.motionService];
    }
 };
