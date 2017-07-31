@@ -1,7 +1,7 @@
 # homebridge-MotionSensor
 
 Creates a Motion Sensor Accessory for iOS Home app/Homekit via Homebridge.
-For now, the state of the sensor is only checked when homebridge requests the current value.
+The state of the sensor can be periodically checked or only checked when homebridge requests the current value.
 
 
 ### Installation
@@ -24,6 +24,8 @@ The other available options are:
  * ```serial``` Serial number to be displayed.
  * ```http_method``` Http metod that will be used to call the ```url``` when the state is requested. Default is 'GET' (check request module to get the available options).
  * ```json_response``` This option defines the field that must be parsed to get the state in the endpoint response body. If not defined (or if the value is an empty string which is the default) the response is assumed to be a boolean value directly.
+ * ```timeout``` Maximum time in miliseconds to wait for the sensor response before fail (Default 3000ms).
+ * ```update_interval``` If not zero, the field defines the polling period in miliseconds for the sensor state (Default is 30000ms). When the value is zero, the state is only updated when homebridge requests the current value.
 
 ### Endpoint expectations
 The enpoint can return 2 types of body responses:
