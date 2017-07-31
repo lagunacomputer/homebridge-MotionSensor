@@ -1,6 +1,6 @@
 {
   "name": "homebridge-MotionSensor",
-  "version": "0.0.1",
+  "version": "4.0.0",
   "description": "http/https motion sensor plugin for homebridge",
   "license": "ISC",
   "keywords": [
@@ -15,6 +15,9 @@
   "author": {
     "name": "@lagunacomputer"
   },
+  "contributors": [{
+    "name": "@metbosch"
+  }],
   "repository": {
     "type": "git",
     "url": "git://github.com/lagunacomputer/homebridge-MotionSensor.git"
