@@ -7,7 +7,7 @@ The state of the sensor can be periodically checked or only checked when homebri
 ### Installation
 
 1. Install homebridge using: ```npm install -g homebridge```
-2. Install this plugin using: ```npm install -g homebridge-MotionSensor```
+2. Install this plugin using: ```npm install -g homebridge-MotionSensor``` or sudo npm install -g git+https://github.com/lagunacomputer/homebridge-MotionSensor.git
 3. Update your configuration file. See sample-config.json in this repository for a sample.
 
 ### Configuration
